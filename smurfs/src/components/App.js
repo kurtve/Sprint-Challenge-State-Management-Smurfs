@@ -1,13 +1,43 @@
-import React, { Component } from "react";
+import React, { useState, useReducer } from 'react';
+import styled from 'styled-components';
+import { SmurfContext } from '../contexts/SmurfContext';
+import { smurfReducer, initialState } from '../reducers/smurfReducer';
+import SmurfList from './SmurfList';
+import AddSmurfForm from './AddSmurfForm';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-      </div>
-    );
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  color: royalblue;
+  font-size: 2.4rem;
+  text-align: center;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 10px;
   }
-}
+
+`;
+
+
+const App = () => {
+
+  const [state, setState] = useState(initialState);
+
+  return (
+    <SmurfContext.Provider value={ state }>
+      <AppWrapper>
+        <h1>SMURFS! 2.0 with Reducer</h1>
+        <AddSmurfForm />
+        <SmurfList />
+      </AppWrapper>
+    </SmurfContext.Provider>
+  );
+};
 
 export default App;
