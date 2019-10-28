@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { SmurfContext } from '../contexts/SmurfContext';
-import { ADD_SMURF } from '../reducers/smurfReducer';
+import * as helpers from './helperFunctions';
 
 
 const ASFWrapper = styled.div`
@@ -83,7 +83,7 @@ const AddSmurfForm = () => {
 			alert('You must supply a name, age, and height for your Smurf!');
 			return;
 		}
-		dispatch({type: ADD_SMURF, payload: formState});
+		helpers.addSmurf(formState, dispatch);
 		resetForm(e);
 	};
 

@@ -1,8 +1,5 @@
 import React from 'react';
-//import React, { useContext } from 'react';
 import styled from 'styled-components';
-//import { SmurfContext } from '../contexts/SmurfContext';
-
 
 
 const SmurfWrapper = styled.div`
@@ -30,9 +27,6 @@ const SmurfWrapper = styled.div`
 
 
 const Smurf = (props) => {
-
-	// we'll use this later to add delete button
-	//const { dispatch } = useContext(SmurfContext);
 
 	return (
 		<SmurfWrapper>

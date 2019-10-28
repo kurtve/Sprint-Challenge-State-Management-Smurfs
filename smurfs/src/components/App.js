@@ -4,8 +4,7 @@ import { SmurfContext } from '../contexts/SmurfContext';
 import { smurfReducer, initialState } from '../reducers/smurfReducer';
 import SmurfList from './SmurfList';
 import AddSmurfForm from './AddSmurfForm';
-import { LOAD_SMURFS } from '../reducers/smurfReducer';
-import axios from 'axios';
+import * as helpers from './helperFunctions';
 
 
 const AppWrapper = styled.div`
@@ -33,16 +32,7 @@ const App = () => {
 
   // load the initial smurf list
   useEffect(() => {
-      console.log('in useEffect');
-      axios
-        .get('http://localhost:3333/smurfs')
-          .then(res => {
-            console.log(res.data);
-            dispatch({type: LOAD_SMURFS, payload: res.data});
-          })
-        .catch(err => {
-          console.log(err);
-        });
+      helpers.getSmurfs(dispatch);
   }, []);
 
 
