@@ -31,7 +31,8 @@ const SmurfWrapper = styled.div`
 
 const Smurf = (props) => {
 
-	//const { smurfList, setSmurfList } = useContext(SmurfContext);
+	// we'll use this later to add delete button
+	//const { dispatch } = useContext(SmurfContext);
 
 	return (
 		<SmurfWrapper>

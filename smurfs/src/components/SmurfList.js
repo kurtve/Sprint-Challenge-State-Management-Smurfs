@@ -8,7 +8,7 @@ const SLWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 10px;
+	margin-top: 20px;
 
 	font-size: 2.4rem;
 	text-align: center;
@@ -23,12 +23,12 @@ const SLWrapper = styled.div`
 
 const SmurfList = () => {
 
-	const { state } = useContext(SmurfContext);
+	const { smurfState } = useContext(SmurfContext);
 
 	return (
 		<SLWrapper>
 			<h3>Here are your Smurfs:</h3>
-			{state.smurfList.map(smurf => (
+			{smurfState.smurfList.map(smurf => (
 				<Smurf key={smurf.id} smurf={smurf} />
 			))}
 		</SLWrapper>

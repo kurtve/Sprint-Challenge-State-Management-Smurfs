@@ -6,6 +6,7 @@ export const DELETE_SMURF = 'DELETE_SMURF';
 
 // initial smurf state
 export const initialState = {
+	maxId: 0,
 	smurfList: [
 		{
 			"name": "Brainey",
@@ -21,8 +22,12 @@ export const initialState = {
 export const smurfReducer = (state, action) => {
 	switch (action.type) {
 		case ADD_SMURF:
+			const newId = state.maxId + 1;
+			const newSmurf = {...action.payload, id: newId};
+
 			return { ...state,
-					smurfList: [...state.smurfList, action.payload]
+					maxId: newId,
+					smurfList: [...state.smurfList, newSmurf]
 				};
 
 		case UPDATE_SMURF:

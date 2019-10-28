@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { SmurfContext } from '../contexts/SmurfContext';
+import { ADD_SMURF } from '../reducers/smurfReducer';
 
 
 const ASFWrapper = styled.div`
@@ -68,17 +69,21 @@ const ASFWrapper = styled.div`
 
 const AddSmurfForm = () => {
 
+	// local state for form fields
 	const initialFormState = { name: '', age: '', height: '' };
-
 	const [formState, setFormState] = useState(initialFormState);
 
-
-	const { state, setState } = useContext(SmurfContext);
+	// dispatcher for submit function
+	const { dispatch } = useContext(SmurfContext);
 
 
 	const submitForm = (e) => {
 		e.preventDefault();
-		// add call to dispatch here
+		if (!(formState.name && formState.age && formState.height)) {
+			alert('You must supply a name, age, and height for your Smurf!');
+			return;
+		}
+		dispatch({type: ADD_SMURF, payload: formState});
 		resetForm(e);
 	};
 
