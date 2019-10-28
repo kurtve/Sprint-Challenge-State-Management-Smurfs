@@ -1,7 +1,9 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
+//import React, { useState, useReducer } from 'react';
 import styled from 'styled-components';
 import { SmurfContext } from '../contexts/SmurfContext';
-import { smurfReducer, initialState } from '../reducers/smurfReducer';
+import { initialState } from '../reducers/smurfReducer';
+//import { smurfReducer, initialState } from '../reducers/smurfReducer';
 import SmurfList from './SmurfList';
 import AddSmurfForm from './AddSmurfForm';
 
@@ -30,7 +32,7 @@ const App = () => {
   const [state, setState] = useState(initialState);
 
   return (
-    <SmurfContext.Provider value={ state }>
+    <SmurfContext.Provider value={ {state, setState} }>
       <AppWrapper>
         <h1>SMURFS! 2.0 with Reducer</h1>
         <AddSmurfForm />

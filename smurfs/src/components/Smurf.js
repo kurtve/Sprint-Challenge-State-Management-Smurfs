@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
+//import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { SmurfContext } from '../contexts/SmurfContext';
+//import { SmurfContext } from '../contexts/SmurfContext';
 
 
 
@@ -30,7 +31,7 @@ const SmurfWrapper = styled.div`
 
 const Smurf = (props) => {
 
-	const { smurfList, setSmurfList } = useContext(SmurfContext);
+	//const { smurfList, setSmurfList } = useContext(SmurfContext);
 
 	return (
 		<SmurfWrapper>

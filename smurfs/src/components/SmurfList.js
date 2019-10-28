@@ -23,12 +23,12 @@ const SLWrapper = styled.div`
 
 const SmurfList = () => {
 
-	const { smurfList } = useContext(SmurfContext);
+	const { state } = useContext(SmurfContext);
 
 	return (
 		<SLWrapper>
 			<h3>Here are your Smurfs:</h3>
-			{smurfList.map(smurf => (
+			{state.smurfList.map(smurf => (
 				<Smurf key={smurf.id} smurf={smurf} />
 			))}
 		</SLWrapper>

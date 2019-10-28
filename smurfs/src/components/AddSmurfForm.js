@@ -17,21 +17,69 @@ const ASFWrapper = styled.div`
 		margin: 10px;
 	}
 
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 350px;
+		padding: 10px;
+		border: 2px solid royalblue;
+		border-radius: 10px;
+	}
+
+	label {
+		font-size: 1.8rem;
+		font-style: italic;
+	}
+
+	span {
+		display: inline-block;
+		text-align: right;
+		width: 60px;
+	}
+
+	input {
+		font-size: 1.6rem;
+		margin: 5px;
+		padding: 5px;
+	}
+
+	.button-bar {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		width: 100%;
+		margin-top: 10px;
+		padding: 10px;
+
+		button {
+			height: 30px;
+			background-color: dodgerblue;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			width: 80px;
+			font-size: 1.6rem;
+		}
+	}
 `;
 
 
 const AddSmurfForm = () => {
 
-	//const { smurfList } = useContext(SmurfContext);
-
 	const initialFormState = { name: '', age: '', height: '' };
 
 	const [formState, setFormState] = useState(initialFormState);
 
+
+	const { state, setState } = useContext(SmurfContext);
+
+
 	const submitForm = (e) => {
 		e.preventDefault();
-		console.log('submit form', formState);
-		resetForm();
+		// add call to dispatch here
+		resetForm(e);
 	};
 
 	const updateField = (e) => {
@@ -47,13 +95,22 @@ const AddSmurfForm = () => {
 		<ASFWrapper>
 			<h3>Enter a New Smurf here:</h3>
 			<form onSubmit={submitForm} className='add-smurf'>
-				<input name='name' className='name' placeholder='Name'
-					onChange={updateField} value={formState.name} />
-				<input name='age' className='age' placeholder='Age'
-					onChange={updateField} value={formState.age} />
-				<input name='height' className='height' placeholder='Height'
-					onChange={updateField} value={formState.height} />
-
+				<label name='name'><span>Name:</span>
+					<input name='name' className='name' placeholder='Name'
+						onChange={updateField} value={formState.name} />
+				</label>
+				<label name='age'><span>Age:</span>
+					<input name='age' className='age' placeholder='Age'
+						onChange={updateField} value={formState.age} />
+				</label>
+				<label name='height'><span>Height:</span>
+					<input name='height' className='height' placeholder='Height'
+						onChange={updateField} value={formState.height} />
+				</label>
+				<div className='button-bar'>
+					<button onClick={e => submitForm(e)}>Submit</button>
+					<button onClick={e => resetForm(e)}>Clear</button>
+				</div>
 			</form>
 		</ASFWrapper>
 	);
