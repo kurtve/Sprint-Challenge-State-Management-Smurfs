@@ -1,34 +1,25 @@
+
 // smurf actions
+export const LOAD_SMURFS = 'LOAD_SMURFS';
+
 export const ADD_SMURF = 'ADD_SMURF';
 export const UPDATE_SMURF = 'UPDATE_SMURF';
 export const DELETE_SMURF = 'DELETE_SMURF';
 
 
-// initial smurf state
 export const initialState = {
-	maxId: 0,
-	smurfList: [
-		{
-			"name": "Brainey",
-			"age": 200,
-			"height": "5cm",
-			"id": 0
-		}
-	]
+	smurfList: []
 };
 
 
 // smurf reducer function
 export const smurfReducer = (state, action) => {
 	switch (action.type) {
-		case ADD_SMURF:
-			const newId = state.maxId + 1;
-			const newSmurf = {...action.payload, id: newId};
+		case LOAD_SMURFS:
+			return {...state, smurfList: action.payload};
 
-			return { ...state,
-					maxId: newId,
-					smurfList: [...state.smurfList, newSmurf]
-				};
+		case ADD_SMURF:
+			return state;
 
 		case UPDATE_SMURF:
 			return state;

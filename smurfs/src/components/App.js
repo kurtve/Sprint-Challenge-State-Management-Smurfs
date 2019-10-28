@@ -1,9 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import { SmurfContext } from '../contexts/SmurfContext';
 import { smurfReducer, initialState } from '../reducers/smurfReducer';
 import SmurfList from './SmurfList';
 import AddSmurfForm from './AddSmurfForm';
+import { LOAD_SMURFS } from '../reducers/smurfReducer';
+import axios from 'axios';
 
 
 const AppWrapper = styled.div`
@@ -28,6 +30,21 @@ const AppWrapper = styled.div`
 const App = () => {
 
   const [smurfState, dispatch] = useReducer(smurfReducer, initialState);
+
+  // load the initial smurf list
+  useEffect(() => {
+      console.log('in useEffect');
+      axios
+        .get('http://localhost:3333/smurfs')
+          .then(res => {
+            console.log(res.data);
+            dispatch({type: LOAD_SMURFS, payload: res.data});
+          })
+        .catch(err => {
+          console.log(err);
+        });
+  }, []);
+
 
   return (
     <SmurfContext.Provider value={ {smurfState, dispatch} }>
