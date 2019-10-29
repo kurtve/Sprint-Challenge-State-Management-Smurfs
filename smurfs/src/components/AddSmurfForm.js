@@ -62,6 +62,10 @@ const ASFWrapper = styled.div`
 			border-radius: 5px;
 			width: 80px;
 			font-size: 1.6rem;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 `;
