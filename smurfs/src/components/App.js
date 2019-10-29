@@ -1,9 +1,11 @@
 import React, { useReducer, useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { SmurfContext } from '../contexts/SmurfContext';
 import { smurfReducer, initialState } from '../reducers/smurfReducer';
 import SmurfList from './SmurfList';
 import AddSmurfForm from './AddSmurfForm';
+import EditSmurf from './EditSmurf';
 import * as helpers from './helperFunctions';
 
 
@@ -40,8 +42,11 @@ const App = () => {
     <SmurfContext.Provider value={ {smurfState, dispatch} }>
       <AppWrapper>
         <h1>SMURFS! 2.0 with Reducer</h1>
-        <AddSmurfForm />
-        <SmurfList />
+
+        <Route path='/' exact component={AddSmurfForm} />
+        <Route path='/' exact component={SmurfList} />
+        <Route path='/edit/:id' component={EditSmurf} />
+      
       </AppWrapper>
     </SmurfContext.Provider>
   );
