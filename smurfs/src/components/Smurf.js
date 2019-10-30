@@ -64,8 +64,7 @@ const Smurf = (props) => {
 
 	const editSmurf = (e) => {
 		e.preventDefault();
-		console.log('called edit');
-		// add link to edit route
+		props.history.push(`/edit/${props.smurf.id}`);
 	};
 
 

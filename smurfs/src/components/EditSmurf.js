@@ -15,7 +15,7 @@ const ESFWrapper = styled.div`
 
 	h3 {
 		font-size: 3rem;
-		margin: 10px;
+		margin: 20px;
 	}
 
 	form {
@@ -23,6 +23,7 @@ const ESFWrapper = styled.div`
 		flex-direction: column;
 		align-items: center;
 		width: 350px;
+		margin-top: 10px;
 		padding: 10px;
 		border: 2px solid royalblue;
 		border-radius: 10px;
@@ -71,14 +72,25 @@ const ESFWrapper = styled.div`
 `;
 
 
-const EditSmurf = () => {
+const EditSmurf = (props) => {
 
-	// local state for form fields
-	const initialFormState = { name: '', age: '', height: '' };
-	const [formState, setFormState] = useState(initialFormState);
+	// get smurf state and dispatcher
+	const { smurfState, dispatch } = useContext(SmurfContext);
 
-	// dispatcher for submit function
-	const { dispatch } = useContext(SmurfContext);
+	const id = Number.parseInt(props.match.params.id);
+
+	// which smurf are we editing?
+	const smurf = smurfState.smurfList.find(entry => entry.id === id);
+
+	// initialize the form to current smurf values
+	const [formState, setFormState] = useState(smurf);
+
+
+	// if we didn't get a smurf, then the id was invalid.  return to list
+	if (smurf === undefined) {
+		props.history.push('/');
+		return ( <p>Loading...</p> );
+	}
 
 
 	const submitForm = (e) => {
@@ -87,17 +99,18 @@ const EditSmurf = () => {
 			alert('You must supply a name, age, and height for your Smurf!');
 			return;
 		}
-		helpers.addSmurf(formState, dispatch);
-		resetForm(e);
+		helpers.editSmurf(formState, dispatch);
+		props.history.push('/');
 	};
+
+	const discardEdits = (e) => {
+		e.preventDefault();
+		props.history.push('/');
+	};
+
 
 	const updateField = (e) => {
 		setFormState( {...formState, [e.target.name]: e.target.value });
-	};
-
-	const resetForm = (e) => {
-		e.preventDefault();
-		setFormState(initialFormState);
 	};
 
 	return (
@@ -118,7 +131,7 @@ const EditSmurf = () => {
 				</label>
 				<div className='button-bar'>
 					<button onClick={e => submitForm(e)}>Save</button>
-					<button onClick={e => resetForm(e)}>Discard</button>
+					<button onClick={e => discardEdits(e)}>Discard</button>
 				</div>
 			</form>
 		</ESFWrapper>
